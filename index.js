@@ -10,7 +10,6 @@ const https = require('https');
 const fetch = require('node-fetch');
 const {File} = await import ('fetch-blob/file.js');
 const FormData = require('form-data');
-const querystring = require('querystring');
 const fs = require('fs');
 
 // Create a new client instance
