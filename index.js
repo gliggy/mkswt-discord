@@ -50,20 +50,18 @@ const fileTest = fs.readFileSync('frog.jpg'); //, {encoding:'utf8'});
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
-
- // const result = await YOUR_FUNCTION();
-   // await interaction.editReply(result);
+    
     const { commandName } = interaction;
 
     if (commandName === 'ping') {
 	await interaction.reply('Pong!');
     } else if (commandName === 'heart-locket') {
-	await interaction.reply('Working on it');
-	const img = await sendPost(fileTest,'heart-locket',key);
+	await interaction.deferReply();
+	const url = interaction.options.getString('image-url');
+	console.log(url);
+	const img = await sendPost(fileTest,'heart-locket', key);
 	console.log(img.status);
 	if (img.status === 200) {
-	    //const imgArray = await img.arrayBuffer();
-	    //console.log({imgArray});
 	    const file = new MessageAttachment(img.body, 'animation2.gif');
 	    const gif = {
 		color: 0x006400,
@@ -88,7 +86,7 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-// Login to Discord with your client's token
+// login to discord
 client.login(token);
 
 }
